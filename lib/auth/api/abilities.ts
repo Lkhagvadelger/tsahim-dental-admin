@@ -3,9 +3,6 @@ import {
   Account,
   Profile,
   Session,
-  Conversation,
-  Message,
-  Bot,
   Price,
   Subscription,
   AppConfiguration,
@@ -13,9 +10,6 @@ import {
   Payer,
   PriceType,
   Product,
-  Tag,
-  UserBots,
-  AppIntegration,
 } from "@prisma/client";
 import { AbilityClass, AbilityBuilder } from "@casl/ability";
 import { PrismaAbility, Subjects } from "@casl/prisma";
@@ -29,11 +23,6 @@ type AppAbility = PrismaAbility<
       Account: Account;
       Profile: Profile;
       Session: Session;
-      Conversation: Conversation;
-      Message: Message;
-      Bot: Bot;
-      Tag: Tag;
-      AppIntegration: AppIntegration;
       Price: Price;
       Subscription: Subscription;
       PriceInterval: PriceInterval;
