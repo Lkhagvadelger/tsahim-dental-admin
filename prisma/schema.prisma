@@ -11,59 +11,18 @@ generator client {
   previewFeatures = ["filterJson"]
 }
 
-
 // In the future we need to add country or nationality column
 model User {
-  id                  String         @id @default(cuid())
-  email               String         @unique
+  id                  String    @id @default(cuid())
+  email               String    @unique
   emailVerified       DateTime?
   passwordDigest      String?
-  phoneNumber         String         @unique
+  phoneNumber         String    @unique
   phoneNumberVerified DateTime?
-  timeZone            String?
-  accounts            Account[]
-  subscriptions       Subscription[]
-  role                UserRole       @default(USER)
-  profile             Profile?
-  createdAt           DateTime       @default(now())
-  updatedAt           DateTime       @updatedAt
-}
-
-model Account {
-  id                String   @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refreshToken      String?
-  accessToken       String?
-  tokenType         String?
-  expiresAt         Int?
-  scope             String?
-  idToken           String?
-  sessionState      String?
-  oauthTokenSecret  String?
-  oauthToken        String?
-  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @default(now())
-
-  @@unique([provider, providerAccountId])
-}
-
-model Profile {
-  id          String    @id @default(cuid())
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String    @unique
-  firstName   String
-  lastName    String?
-  birthDate   DateTime?
-  picture     String    @default("")
-  notifyEmail Boolean   @default(true)
-  notifyPush  Boolean   @default(true)
-  notifyBadge Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  firstName           String
+  lastName            String?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
 }
 
 model Session {
@@ -73,70 +32,78 @@ model Session {
   expiresAt DateTime @default(now())
 }
 
-model Product {
-  id          String   @id @default(cuid())
-  active      Boolean  @default(false)
-  name        String
-  description String?
-  image       String?
-  prices      Price[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+model Person {
+  id                  String    @id @default(cuid())
+  register            String?
+  firstName           String
+  lastName            String
+  birthDate           DateTime
+  phoneNumber         String    @unique
+  phoneNumberVerified DateTime?
+  age                 Int
+  gender              String
+  email               String?
+  address             String?
+  note                String?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  Patient             Patient[] @relation("PatientPerson")
+  Doctor              Doctor[]
 }
 
-model Price {
-  id              String         @id @default(cuid())
-  product         Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId       String
-  active          Boolean        @default(false)
-  currency        String
-  interval        PriceInterval?
-  unitAmount      Decimal?
-  intervalCount   Int?
-  trialPeriodDays Int?
-  type            PriceType?
-  subscriptions   Subscription[]
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
+model Patient {
+  id                 String         @id @default(cuid())
+  cardNumber         Int            @unique
+  person             Person         @relation("PatientPerson", fields: [personId], references: [id])
+  personId           String
+  profession         String?
+  engagementType     StaticChoice   @relation(fields: [engagementTypeId], references: [id])
+  engagementTypeId   String
+  initFamilyMember   FamilyMember[] @relation("initFamilyMember")
+  targetFamilyMember FamilyMember[] @relation("targetFamilyMember")
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
 }
 
-model Subscription {
-  id                String             @id @default(cuid())
-  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId            String             @unique
-  price             Price?             @relation(fields: [priceId], references: [id])
-  priceId           String?
-  status            SubscriptionStatus
-  startDate         DateTime?
-  endedAt           DateTime?
-  trialEnd          DateTime?
-  trialStart        DateTime?
-  cancelAt          DateTime?
-  cancelAtPeriodEnd Boolean?
-  canceledAt        DateTime?
-  metadata          Json?
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
+model FamilyMember {
+  id              String   @id @default(cuid())
+  initPatient     Patient  @relation("initFamilyMember", fields: [initPatientId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  initPatientId   String
+  targetPatient   Patient  @relation("targetFamilyMember", fields: [targetPatientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  targetPatientId String
+  relation        String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
-enum PriceType {
-  recurring
-  one_time
+model Doctor {
+  id           String    @id @default(cuid())
+  person       Person    @relation(fields: [personId], references: [id])
+  bank         String
+  bankAccount  String
+  startedDate  DateTime
+  leftDate     DateTime?
+  workPosition String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  personId     String
 }
 
-enum SubscriptionStatus {
-  active
-  canceled
-  incomplete
-  incomplete_expired
-  past_due
-  trialing
-  unpaid
+model StaticChoiceType {
+  id           String         @id @default(cuid())
+  name         String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  StaticChoice StaticChoice[]
 }
 
-enum PriceInterval {
-  day
-  month
-  week
-  year
+model StaticChoice {
+  id                 String           @id @default(cuid())
+  name               String
+  desc               String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  staticChoiceTypeId String
+  StaticChoiceType   StaticChoiceType @relation(fields: [staticChoiceTypeId], references: [id])
+  Patient            Patient[]
 }

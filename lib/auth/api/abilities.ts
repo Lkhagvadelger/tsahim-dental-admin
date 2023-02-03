@@ -1,15 +1,6 @@
 import {
   User,
-  Account,
-  Profile,
-  Session,
-  Price,
-  Subscription,
-  AppConfiguration,
-  PriceInterval,
-  Payer,
-  PriceType,
-  Product,
+  Session
 } from "@prisma/client";
 import { AbilityClass, AbilityBuilder } from "@casl/ability";
 import { PrismaAbility, Subjects } from "@casl/prisma";
@@ -19,17 +10,7 @@ type AppAbility = PrismaAbility<
     string,
     Subjects<{
       User: User;
-      AppConfiguration: AppConfiguration;
-      Account: Account;
-      Profile: Profile;
       Session: Session;
-      Price: Price;
-      Subscription: Subscription;
-      PriceInterval: PriceInterval;
-      Payer: Payer;
-      PriceType: PriceType;
-      Product: Product;
-      UserBots: UserBots;
     }>
   ]
 >;
