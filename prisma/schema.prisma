@@ -7,8 +7,7 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["filterJson"]
+  provider = "prisma-client-js"
 }
 
 // In the future we need to add country or nationality column
@@ -77,16 +76,18 @@ model FamilyMember {
 }
 
 model Doctor {
-  id           String    @id @default(cuid())
-  person       Person    @relation(fields: [personId], references: [id])
-  bank         String
-  bankAccount  String
-  startedDate  DateTime
-  leftDate     DateTime?
-  workPosition String
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  personId     String
+  id               String         @id @default(cuid())
+  person           Person         @relation(fields: [personId], references: [id])
+  bank             String
+  bankAccount      String
+  startedDate      DateTime
+  dismissalDate    DateTime?
+  workPosition     String
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  personId         String
+  hospitalBranch   HospitalBranch @relation(fields: [hospitalBranchId], references: [id])
+  hospitalBranchId String
 }
 
 model StaticChoiceType {
@@ -106,4 +107,104 @@ model StaticChoice {
   staticChoiceTypeId String
   StaticChoiceType   StaticChoiceType @relation(fields: [staticChoiceTypeId], references: [id])
   Patient            Patient[]
+}
+
+model TreatmentType {
+  id         String      @id @default(cuid())
+  name       String
+  desc       String
+  treatments Treatment[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model TreatmentGroup {
+  id         String      @id @default(cuid())
+  name       String
+  desc       String
+  treatments Treatment[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Treatment {
+  id                String            @id @default(cuid())
+  name              String
+  desc              String
+  price             Int               @default(0)
+  treatmentType     TreatmentType     @relation(fields: [treatmentTypeId], references: [id])
+  treatmentTypeId   String
+  TreatmentGroup    TreatmentGroup?   @relation(fields: [TreatmentGroupId], references: [id])
+  TreatmentGroupId  String?
+  treatmentAction   TreatmentAction[]
+  parentTreatment   Treatment?        @relation("parentChildTreatment", fields: [parentTreatmentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  parentTreatmentId String?
+  childTreatments   Treatment[]       @relation("parentChildTreatment")
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+}
+
+// This table should be extended for more detailed information
+model TreatmentAction {
+  id          String    @id @default(cuid())
+  name        String
+  desc        String
+  treatment   Treatment @relation(fields: [treatmentId], references: [id])
+  treatmentId String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Hospital {
+  id           String   @id @default(cuid())
+  name         String
+  address      String
+  phoneNumber  String
+  directorName String
+  licenseOrgId String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model HospitalBranch {
+  id           String   @id @default(cuid())
+  name         String
+  address      String
+  phoneNumber  String
+  directorName String
+  doctors      Doctor[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Customer {
+  id              String   @id @default(cuid())
+  name            String
+  address         String
+  phoneNumber     String
+  register        String
+  email           String
+  bank            String
+  bankAccount     String
+  partnershipDate DateTime
+  note            String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model ClientComputer {
+  id         String   @id @default(cuid())
+  ipAddress  String
+  macAddress String
+  type       String   @default("client")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model RiskRecognition {
+  id        String   @id @default(cuid())
+  name      String
+  desc      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
