@@ -1,30 +1,11 @@
-import { ReactNode, useEffect, useState } from "react";
-import NextLink from "next/link";
 import {
   Box,
   Flex,
-  LinkBox,
-  Text,
-  HStack,
   Heading,
-  useColorModeValue,
-  useBreakpointValue,
+  LinkBox, useColorModeValue
 } from "@ui/index";
-import { useCurrentUser } from "@lib/auth/data/authHooks";
+import { ReactNode } from "react";
 import { Logo } from "./Logo";
-// import { MobileHamburgerMenu } from "./navigation/MobileHamburgerMenu";
-// import { NavMenu } from "./navigation/NavMenu";
-import { LanguageDropdown } from "./navigation/LanguageDropdown";
-import { NotificationDropdown } from "./navigation/NotificationDropdown";
-import { ThemeToggler } from "./navigation/ThemeToggler";
-// import { useMobileMenuState } from "./navigation/useMobileMenuState";
-import { TopRightMenu } from "./navigation/TopRightMenu";
-
-const roleToRootUrl = {
-  STUDENT: "/",
-  TEACHER: "/",
-  ADMIN: "/",
-};
 
 export const AppLayout = ({
   title = "",
@@ -35,16 +16,6 @@ export const AppLayout = ({
   contentWidth?: string;
   children?: ReactNode;
 }) => {
-  // const { isMenuOpen, toggle } = useMobileMenuState();
-  const { user, isLoggedIn } = useCurrentUser();
-  const [rootUrl, setRootUrl] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const isMobile = useBreakpointValue({ base: true, lg: false });
-
-  useEffect(() => {
-    setRootUrl(roleToRootUrl[user?.role as keyof typeof roleToRootUrl]);
-  }, [user]);
-
   return (
     <>
       <Flex
@@ -66,7 +37,7 @@ export const AppLayout = ({
           mx="auto"
         >
           <LinkBox
-            href={`/${rootUrl}`}
+            href={`/`}
             box={true}
             flexShrink={0}
             mx={{ base: 0, lg: 10 }}
@@ -92,7 +63,6 @@ export const AppLayout = ({
           {children}
         </Box>
       </Box>
-     
     </>
   );
 };

@@ -21,8 +21,6 @@ export const deleteUser = async (userId: string,phoneNumber:string, email:string
   })
   
 };
-export * from "./strategies/facebook";
-export * from "./strategies/google";
 export * from "./strategies/local";
 export * from "./strategies/bearer";
  

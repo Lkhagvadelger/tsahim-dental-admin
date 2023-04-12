@@ -1,5 +1,3 @@
-import { BubbleUserProfile } from "../api/usertypes";
-
 export const validateEmail = (email: string) => {
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -10,10 +8,8 @@ export const validatePassword = (password: string) => {
   const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
   return re.test(String(password).toLowerCase());
 };
-export const userPromptFilterAndModification = (
-  userResponce: string 
-) => {
-  userResponce = userResponce.trim().replace(/[\n\t]/g, "");;
+export const userPromptFilterAndModification = (userResponce: string) => {
+  userResponce = userResponce.trim().replace(/[\n\t]/g, "");
   return userResponce;
 };
 //Works on only Mongolian phone number

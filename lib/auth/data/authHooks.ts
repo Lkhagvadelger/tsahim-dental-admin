@@ -1,10 +1,10 @@
-import { useQueryClient, useMutation, useQuery } from "react-query";
-import { fetcher } from "@util/query";
-import { AppError } from "@util/errors";
-
 // We should subset this to only interface we need.
-import { User as PrismaUser, UserRole } from "@prisma/client";
-export type User = Pick<PrismaUser, "id" | "email" | "phoneNumber" | "role">;
+import { User as PrismaUser } from "@prisma/client";
+import { AppError } from "@util/errors";
+import { fetcher } from "@util/query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+
+export type User = Pick<PrismaUser, "id" | "email" | "phoneNumber" | "firstName">;
 
 type AuthInput = { email: string; password: string };
 export type RegisterInputType = {
@@ -15,11 +15,6 @@ export type RegisterInputType = {
   phoneNumber: string;
   firstName: string;
   lastName: string;
-  profile: {
-    firstName: string;
-    lastName: string;
-  };
-  role: UserRole;
   timeZone?: string;
 };
 type PhoneAuthInput = {
@@ -42,7 +37,7 @@ const useHandleAuth = (shouldInvalidate = false) => {
 };
 
 export const useCurrentUser = () => {
-  const query = useQuery<User & { profile: any }, AppError>(
+  const query = useQuery<User, AppError>(
     "currentUser",
     () => fetcher.get("auth/current"),
     {

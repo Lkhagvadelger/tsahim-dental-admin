@@ -31,6 +31,7 @@ model Session {
   expiresAt DateTime @default(now())
 }
 
+//This person is for both patient and doctor
 model Person {
   id                  String    @id @default(cuid())
   register            String?

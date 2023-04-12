@@ -15,7 +15,6 @@ export const columns = [
       return (
         <UserDescription
           email={data.email}
-          profile={data.profile}
           phoneNumber={data.phoneNumber}
         />
       );
@@ -28,10 +27,6 @@ export const columns = [
   {
     Header: "PhoneNumber",
     accessor: "phoneNumber",
-  },
-  {
-    Header: "Role",
-    accessor: "role",
   },
   {
     Header: "Time zone",

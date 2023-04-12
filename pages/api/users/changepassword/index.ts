@@ -1,10 +1,6 @@
 import { createHandler } from "@api/handler";
-// import { subject } from "@casl/ability";
 import {
-  getUsers,
-  createUser,
-  updateUser,
-  changePassword,
+  changePassword
 } from "@lib/user/api/userService";
 import { ERROR_MESSAGES } from "@util/errors";
 

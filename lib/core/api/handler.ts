@@ -5,7 +5,6 @@ import { trustProxyMiddleware } from "./middlewares/trust-proxy";
 import { responseMiddleware } from "./middlewares/response";
 import { sessionMiddleware } from "./middlewares/session";
 import { passport } from "./middlewares/passport";
-import { abilityMiddleware } from "./middlewares/ability";
 import { extractUserFromJwt } from "./middlewares/auth";
 
 const middlewares = [
@@ -15,7 +14,6 @@ const middlewares = [
   passport.initialize(),
   passport.session(),
   extractUserFromJwt,
-  abilityMiddleware,
 ];
 
 export const createHandler = (options = {}) => {

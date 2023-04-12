@@ -4,7 +4,6 @@ import { fetcher } from "@util/query";
 // We should subset this to only interface we need.
 import { User as PrismaUser } from "@prisma/client";
 import { QueryParamType } from "@ui/hooks/query-param";
-export type User = Pick<PrismaUser, "id" | "email" | "role">;
 
 // Get list of all users
 export const useUsers = (filter: QueryParamType) => {

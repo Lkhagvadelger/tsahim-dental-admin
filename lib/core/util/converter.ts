@@ -1,4 +1,3 @@
-import { BubbleUserProfile } from "@lib/user/api/usertypes";
 
 export const convertInchesToFeetInches = (inches: number) => {
   var feet = Math.floor(inches / 12);
@@ -6,33 +5,6 @@ export const convertInchesToFeetInches = (inches: number) => {
   return feet + " feet" + (inch == 0 ? "" : " " + inch + " inches");
 };
 
-export const convertJsonProfileToProfile = (jsonProfile: BubbleUserProfile) => {
-  const profile =
-    "-" +
-    jsonProfile.age +
-    " years old\n-" +
-    convertInchesToFeetInches(jsonProfile.height) +
-    ", " +
-    jsonProfile.weight +
-    " pounds\n" +
-    "-usually sleep at " +
-    jsonProfile.sleepTime +
-    " and wakes up " +
-    jsonProfile.wakeupTime +
-    "\n-Having a challenge " +
-    jsonProfile.challenges +
-    "\n-Fitness goals, " +
-    jsonProfile.fitnessGoals +
-    "\n-Current routine " +
-    jsonProfile.currentRoutine +
-    "\n-Target routine " +
-    jsonProfile.targetRoutine;
-  "\n-Current nutrition " + jsonProfile.currentNutrition;
-  "\n-Preferred exercises " + jsonProfile.preferredExercises;
-  "\n-Accountability: " + jsonProfile.accountabilitySetting;
-
-  return profile;
-};
 export const displayTimeByTimeZone = (timeZone: string) => {
   const formatter = new Intl.DateTimeFormat("en-GB", {
     timeZone: timeZone,

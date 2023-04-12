@@ -27,7 +27,6 @@ import {
   useUpdateUser,
 } from "@lib/auth/data/authHooks";
 import { PasswordField } from "@lib/auth/ui";
-import { UserRole } from "@prisma/client";
 import { toaster } from "@ui/helpers/toaster";
 import moment from "moment-timezone";
 import React, { useState } from "react";
@@ -52,7 +51,6 @@ export const UserForm = ({
     firstName: "",
     lastName: "",
     password: "",
-    role: UserRole.USER,
   };
   const {
     control,
@@ -66,8 +64,8 @@ export const UserForm = ({
   } = useForm<RegisterInputType>({
     defaultValues: {
       ...(data ? data : defaultData),
-      firstName: data?.profile?.firstName,
-      lastName: data?.profile?.lastName,
+      firstName: data?.firstName,
+      lastName: data?.lastName,
     },
   });
   console.log(data?.timeZone);
@@ -222,45 +220,6 @@ export const UserForm = ({
               ></Input>
               <FormErrorMessage>
                 {errors.phoneNumber && errors.phoneNumber.message}
-              </FormErrorMessage>
-            </FormControl>
-          </HStack>
-          <HStack>
-            <FormControl id="role" isInvalid={!!errors.role}>
-              <FormLabel>Role</FormLabel>
-              <RadioGroup
-                onChange={(e: any) => {
-                  setValue("role", e);
-                }}
-                value={getValues("role")}
-              >
-                <Stack direction="row">
-                  <Radio value={"ADMIN"}>Admin</Radio>
-                  <Radio value={"USER"}>User</Radio>
-                </Stack>
-              </RadioGroup>
-              <FormErrorMessage>
-                {errors.role && errors.role.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl id="timeZone" isInvalid={!!errors.timeZone}>
-              <FormLabel>Time Zone</FormLabel>
-              <Select {...register("timeZone")}>
-                {moment.tz.names() &&
-                  moment.tz.names().map((name, i) => {
-                    return data?.timeZone == name ? (
-                      <option key={i} value={name} selected>
-                        {name}
-                      </option>
-                    ) : (
-                      <option key={i} value={name}>
-                        {name}
-                      </option>
-                    );
-                  })}
-              </Select>
-              <FormErrorMessage>
-                {errors.timeZone && errors.timeZone.message}
               </FormErrorMessage>
             </FormControl>
           </HStack>

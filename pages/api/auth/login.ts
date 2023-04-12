@@ -22,11 +22,7 @@ handler.post(async (req, res, next) => {
         const body = {
           id: user.id,
           email: user.email,
-          username: user.profile?.username
-            ? user.profile?.username
-            : user.email,
-          profile: user.profile,
-          role: user.role,
+          username: user?.firstName,
         };
 
         if (!process.env.JWT_SECRET)

@@ -1,5 +1,4 @@
 import { AppRequest, AppResponse } from "../types";
-import { defineRulesFor } from "@lib/auth/api/abilities";
 import { ERROR_MESSAGES } from "@util/errors";
 import passport from "passport";
 

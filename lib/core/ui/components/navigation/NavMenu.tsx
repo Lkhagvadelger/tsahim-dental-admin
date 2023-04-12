@@ -9,13 +9,6 @@ const links = [
     icon: <HiViewGrid />,
     requireAuth: true,
   },
-  {
-    label: "Your Profile",
-    href: "/account/profile",
-    root: true,
-    icon: <HiViewGrid />,
-    requireAuth: true,
-  },
 ];
 
 type Props = { isOpen?: boolean; rootUrl?: string; isLoggedIn?: boolean };
@@ -40,7 +33,7 @@ const MobileNavMenu = ({ isOpen, isLoggedIn = false, rootUrl = "" }: Props) => {
           return (
             <NavItem.Mobile
               key={link.href}
-              href={(link.root ? "" : rootUrl) + link.href}
+              href={link.href}
               label={link.label}
             />
           );

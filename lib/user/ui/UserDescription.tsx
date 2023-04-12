@@ -9,13 +9,9 @@ type Props = {
   phoneNumber?: string;
   name?: string;
   email?: string | null;
-  profile?: {
-    firstName: string;
-    lastName: string;
-  };
 };
 
-export const UserDescription = ({ phoneNumber, profile, email }: Props) => (
+export const UserDescription = ({ phoneNumber, email }: Props) => (
   <Stack direction="row" align="center">
     <Box flexShrink={0} h="10" w="10">
       <Avatar
@@ -35,8 +31,5 @@ export const UserDescription = ({ phoneNumber, profile, email }: Props) => (
         ></AvatarBadge>
       </Avatar>
     </Box>
-    <Text>
-      {profile?.firstName} {profile?.lastName} 
-    </Text>
   </Stack>
 );

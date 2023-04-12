@@ -30,10 +30,7 @@ type FormValues = {
   password: string;
 };
 
-const defaultPaths: Record<User["role"], string> = {
-  ADMIN: "",
-  USER: "",
-};
+
 
 export const AuthForm = ({ type }: Props) => {
   const loginMutation = useLogin();
@@ -53,9 +50,6 @@ export const AuthForm = ({ type }: Props) => {
         toaster.error(ta(error.translationKey));
       },
       onSuccess: (user) => {
-        //onst nextPath: string = router.query.redirectTo
-          // ? router.query.redirectTo.toString()
-          // : defaultPaths[user.role];
         router.push("/admin");
       },
     });

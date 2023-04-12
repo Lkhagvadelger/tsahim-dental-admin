@@ -1,23 +1,9 @@
 import {
-  Flex,
-  Box,
-  DrawerContent,
-  Drawer,
+  Button, Drawer,
   DrawerBody,
-  DrawerCloseButton,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  VStack,
-  useDisclosure,
-  useBreakpoint,
-  Button,
-  Icon,
+  DrawerCloseButton, DrawerContent, DrawerOverlay, Flex, Icon, useBreakpoint, useDisclosure
 } from "@chakra-ui/react";
-import { ChangePasswordPage } from "@lib/profile/ui";
-import { UserList } from "@lib/user/ui";
-import React from "react";
-import { ReactChild, ReactChildren } from "react";
+import React, { ReactChild, ReactChildren } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { Sidebar } from "./Sidebar";
 

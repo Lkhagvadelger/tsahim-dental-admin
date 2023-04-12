@@ -54,7 +54,7 @@ const MenuButton = ({ isOpen }: { isOpen: boolean }) => {
   );
 };
 
-const MenuPopup = ({ user }: { user: (User & { profile: any }) | null }) => {
+const MenuPopup = ({ user }: { user: User | null }) => {
   const logoutMutation = useLogout();
 
   return (
@@ -97,7 +97,7 @@ const MenuPopup = ({ user }: { user: (User & { profile: any }) | null }) => {
               lg: useColorModeValue("gray.800", "gray.300"),
             }}
           >
-            {user?.profile?.firstName} {user?.profile?.lastName}
+            {user?.firstName}
           </Text>
         </Box>
       </HStack>
@@ -154,7 +154,7 @@ export const TopRightMenu = ({
   user,
 }: {
   setMenuOpen: any;
-  user: (User & { profile: any }) | null;
+  user: User | null;
 }) => {
   const isMobile = useBreakpointValue({ base: true, lg: false });
 
