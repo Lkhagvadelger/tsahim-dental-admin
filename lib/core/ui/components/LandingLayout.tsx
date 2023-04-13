@@ -54,7 +54,6 @@ export const LandingLayout = ({ children }: { children?: ReactNode }) => {
                   cursor={"pointer"}
                   fontWeight={500}
                   fontSize={"16px"}
-                  F
                 >
                   <Text>Нүүр</Text>
                   <Text>Боломжууд</Text>

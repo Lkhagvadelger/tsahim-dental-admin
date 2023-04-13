@@ -11,7 +11,6 @@ import {
   useColorModeValue,
   VStack,
 } from "@ui/index";
-import { route } from "next/dist/server/router";
 import { ReactNode } from "react";
 import router from "next/router";
 type Column = {

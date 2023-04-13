@@ -3,7 +3,7 @@ import { createHandler } from "@api/handler";
 const handler = createHandler();
 
 handler.delete((req, res) => {
-  req.logout();
+  req.logout;
   res.sendSuccess({});
 });
 

@@ -1,25 +1,29 @@
-import { createStandaloneToast } from "@chakra-ui/react";
-
+import { createStandaloneToast, ToastPosition } from "@chakra-ui/react";
+import { theme } from "../index";
+const position = "top";
+const duration = 9000;
 const isClosable = true;
-const duration = 3000;
 
-const toast = createStandaloneToast();
+const { toast } = createStandaloneToast({ theme });
 
 export const toaster = {
-  success(message: string, title = "") {
+  success(message: string, title = "", positionManual?: ToastPosition) {
     toast({
       title,
       description: message,
       status: "success",
+      position: positionManual ? positionManual : position,
       duration,
       isClosable,
     });
   },
+
   info(message: string, title = "") {
     toast({
       title,
       description: message,
       status: "info",
+      position,
       duration,
       isClosable,
     });
@@ -29,6 +33,7 @@ export const toaster = {
       title,
       description: message,
       status: "warning",
+      position,
       duration,
       isClosable,
     });
@@ -38,6 +43,7 @@ export const toaster = {
       title,
       description: message,
       status: "error",
+      position,
       duration,
       isClosable,
     });

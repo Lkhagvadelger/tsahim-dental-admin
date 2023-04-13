@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 const handler = createHandler();
 
 handler.post(async (req, res, next) => {
-  passport.authenticate("local", (err, user) => {
+  passport.authenticate("local", (err:any, user:any) => {
     if (err || !user) {
       return res.sendError(401, ERROR_MESSAGES.UNAUTHORIZED, err.message);
     }

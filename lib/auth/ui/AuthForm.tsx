@@ -101,8 +101,7 @@ export const AuthForm = ({ type }: Props) => {
           mt="6"
           type="submit"
           size="lg"
-          fontSize="md"
-          isFullWidth
+          fontSize="md"  
           isLoading={action.isLoading}
         >
           {type === "login" ? ("login") : ("signup")}

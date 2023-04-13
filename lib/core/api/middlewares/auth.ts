@@ -7,7 +7,7 @@ export const extractUserFromJwt = (
   res: AppResponse,
   next: () => void
 ) => {
-  passport.authenticate("jwt", { session: false }, (err, user) => {
+  passport.authenticate("jwt", { session: false }, (err:any, user:any) => {
     if (user) req.user = user;
     next();
   })(req, res, next);
@@ -18,7 +18,7 @@ export const authorize = (
   res: AppResponse,
   next: () => void
 ) => {
-  passport.authenticate("jwt", { session: false }, (err, user) => {
+  passport.authenticate("jwt", { session: false }, (err:any, user:any) => {
     if (!req.user)
       return res.sendError(401, ERROR_MESSAGES.UNAUTHORIZED, "not-logged-in");
     next();
