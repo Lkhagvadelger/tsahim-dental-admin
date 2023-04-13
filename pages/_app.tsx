@@ -6,7 +6,6 @@ import { QueryClientProvider } from "react-query";
 import { ChakraProvider, theme, ProgressBar } from "@ui/index";
 import { AuthProvider } from "@lib/auth/ui";
 import { queryClient } from "@util/query";
-import { initAnalytics, logPageView, logEvent } from "@util/analytics";
 
 import "@fontsource/inter";
 import "@fontsource/inter/500.css";
@@ -27,7 +26,6 @@ type Props = AppProps & {
 Router.events.on("routeChangeStart", progress.start);
 Router.events.on("routeChangeError", progress.finish);
 Router.events.on("routeChangeComplete", () => {
-  logPageView();
   progress.finish();
 });
 
@@ -36,21 +34,9 @@ export const reportWebVitals = ({
   name,
   label,
   value,
-}: NextWebVitalsMetric) => {
-  logEvent({
-    name,
-    category: label === "web-vital" ? "Web Vitals" : "Custom metric",
-    label: id,
-    value: Math.round(name === "CLS" ? value * 1000 : value),
-    interaction: false,
-  });
-};
+}: NextWebVitalsMetric) => {};
 
 const MyApp = ({ Component, pageProps }: Props) => {
-  useEffect(() => {
-    initAnalytics();
-  }, []);
-
   return (
     <ChakraProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
