@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   postgres:
-    container_name: gpt3_dev_postgres_container
+    container_name: tsahim_dental_admin
     image: postgres:latest
     ports:
       - 5988:5432
