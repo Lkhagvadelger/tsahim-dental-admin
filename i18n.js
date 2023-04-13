@@ -2,9 +2,9 @@ module.exports = {
   locales: ["en"],
   defaultLocale: "en",
   pages: {
-    "*": [ "auth"],
-     "/": ["auth"],
-     "rgx:^/auth": ["auth"],
+    "*": ["app"],
+    "/": ["app"],
+    "rgx:^/app": ["app"],
   },
   interpolation: {
     prefix: "${",

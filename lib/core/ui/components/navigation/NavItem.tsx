@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
-import { Button } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import { ActiveLink } from "./ActiveLink";
+import NextLink from "next/link";
 
 type NavItemProps = {
   href?: string;
@@ -15,16 +16,11 @@ type DesktopNavItemProps = NavItemProps & {
 const DesktopNavItem = (props: DesktopNavItemProps) => {
   const { icon, label, href = "#", active } = props;
   return (
-    <ActiveLink href={href} passHref>
-      <Button
-        as="a"
-        aria-current={active ? "page" : undefined}
-        variant="ghost"
-        leftIcon={<>{icon}</>}
-      >
+    <NextLink href={href}>
+      <Text color={"gray.700"} cursor={"pointer"} fontWeight={500} fontSize={"16px"}>
         {label}
-      </Button>
-    </ActiveLink>
+      </Text>
+    </NextLink>
   );
 };
 

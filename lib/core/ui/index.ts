@@ -8,6 +8,7 @@ import {
 // Global style overrides
 import { styles } from "./foundations/styles";
 import { fonts } from "./foundations/fonts";
+import { colors } from "./foundations/colors";
 
 // Component style overrides
 import Heading from "./overrides/heading";
@@ -27,7 +28,7 @@ export { toaster } from "./helpers/toaster";
 export { ProgressBar } from "./components/ProgressBar";
 export { SEO } from "./components/SEO";
 export { AppLayout } from "./components/AppLayout";
-export { NavMenuLayout } from "./components/NavMenuLayout";
+export { LandingLayout as NavMenuLayout } from "./components/LandingLayout";
 export { NavContentLayout } from "./components/NavContentLayout";
 export { Logo } from "./components/Logo";
 export { LinkBox } from "./components/LinkBox";
@@ -53,6 +54,7 @@ const overrides = {
   config,
   styles,
   fonts,
+  colors,
   // Other foundational style overrides go here
   components: {
     Heading,

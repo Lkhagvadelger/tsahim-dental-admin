@@ -1,7 +1,7 @@
 import { SystemStyleObject } from "@chakra-ui/theme-tools";
 
 const baseStyle: SystemStyleObject = {
-  borderRadius: "3px",
+  borderRadius: "8px",
 };
 
 const sizes: Record<string, SystemStyleObject> = {
@@ -22,12 +22,15 @@ const variants = {
     borderColor: "red.500",
   },
   default: {
-    bg: "blue.500",
+    bg: "primary.500",
     color: "white",
     _hover: {
-      bg: "blue.100",
+      bg: "primary.600",
     },
-    size: "sm",
+    px: "18px",
+    fontSize: "14px",
+    fontWeight: "500px",
+    py: "10px",
   },
   publish: {
     bg: "transparent",
@@ -88,7 +91,7 @@ const variants = {
 
 const defaultProps = {
   size: "md",
-  variant: "solid",
+  variant: "default",
   casing: "capitalize",
 };
 

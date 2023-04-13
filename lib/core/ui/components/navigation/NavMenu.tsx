@@ -4,10 +4,28 @@ import { NavItem } from "./NavItem";
 
 const links = [
   {
-    label: "Dashboard",
+    label: "Нүүр",
     href: "/",
     icon: <HiViewGrid />,
-    requireAuth: true,
+    requireAuth: false,
+  },
+  {
+    label: "Боломжууд",
+    href: "/#features",
+    icon: <HiViewGrid />,
+    requireAuth: false,
+  },
+  {
+    label: "Үнэ",
+    href: "/#price",
+    icon: <HiViewGrid />,
+    requireAuth: false,
+  },
+  {
+    label: "Холбоо барих",
+    href: "/#contact",
+    icon: <HiViewGrid />,
+    requireAuth: false,
   },
 ];
 
